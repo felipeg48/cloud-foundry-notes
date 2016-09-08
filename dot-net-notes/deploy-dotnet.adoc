@@ -1,0 +1,104 @@
+= Deploying .NET Applications in Cloud Foundry
+
+== Install .NET Core
+
+. Pre-requirements:
++
+[source,shell]
+----
+$ brew update
+$ brew install openssl
+$ ln -s /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/
+$ ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/
+----
+. Install *.NET Core SDK* by download the package from https://go.microsoft.com/fwlink/?LinkID=809124[here]
+. Test your installation by creating a simple app:
++
+[source,shell]
+----
+$ mkdir hello-world
+$ cd hello-world
+$ dotnet new
+$ dotnet restore
+$ dotnet run
+----
+
+== Optional: Install Visual Studio Code
+
+. You can download *Visual Studio Code* from https://code.visualstudio.com/[here]. Useful as a Code editor.
+. Install the *C# Extension* for the Visual Studio Code https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp[here].
+
+
+== Install NodeJS
+
+. Install *NodeJS*. This is required to install an additonal tools (Yeoman and Bower).
++
+[source,shell]
+----
+$ brew install node
+----
+
+== Create a Simple ASP .NET Core Application
+
+. Install the Yeoman and Bower
++
+[source,shell]
+----
+$ npm install -g yo generator-aspnet bower
+----
+. With the *npm* command, create a ASP .NET app.
++
+[source,shell]
+----
+$ mkdir NET
+$ cd NET
+$ yo aspnet
+----
++
+- Select *Web Application Basic [without Membership and Authorization]* and hit Enter
+- Select Bootstrap (3.3.6) as the UI framework and hit Enter
+- Use *simple-web-app* for the app name and hit Enter
+
+== Test your ASP .NET Core Web App
+
+. Execute the following commands:
++
+[source,shell]
+----
+$ cd "simple-web-app"
+$ dotnet restore
+$ dotnet run
+----
+
+== Deploy the ASP .NET Core Web App to Cloud Foundry
+
+. Modify the *project.json* file by adding the following property to the *buildOptions*:
++
+[source,json]
+.project.json - "buildOptions"
+----
+"copyToOutput": {
+    "include": [
+      "wwwroot",
+      "Areas/**/Views",
+      "Views",
+      "Controllers",
+      "appsettings.json"
+    ]
+  }
+----
++
+[NOTE]
+====
+This is required to include all the files for a proper run.
+====
+. Push the app by executing the following commands:
++
+```shell
+$ cf push dotnet -k 1G -b https://github.com/cloudfoundry-community/dotnet-core-buildpack.git
+```
++
+[NOTE]
+====
+The *-k 1G* is important because the .NET Runtime required a lot of libraries.
+====
