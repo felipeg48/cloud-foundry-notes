@@ -1,5 +1,8 @@
 = Deploying .NET Applications in Cloud Foundry
 
+The following notes shows how to run .NET apps in Cloud Foundry. In order to test locally your .NET apps, use the following steps that will setup your machine. Im assuming you have a *Mac*.
+
+
 == Install .NET Core
 
 . Pre-requirements:
@@ -11,6 +14,11 @@ $ brew install openssl
 $ ln -s /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/
 $ ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/
 ----
++
+[NOTE]
+====
+If you don't have *Homebrew* installed you can follow the instructions http://brew.sh/[here].
+====
 . Install *.NET Core SDK* by download the package from https://go.microsoft.com/fwlink/?LinkID=809124[here]
 . Test your installation by creating a simple app:
 +
