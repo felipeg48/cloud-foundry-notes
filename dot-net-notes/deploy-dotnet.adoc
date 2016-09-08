@@ -1,6 +1,6 @@
 = Deploying .NET Applications in Cloud Foundry
 
-The following notes shows how to run .NET apps in Cloud Foundry. In order to test locally your .NET apps, use the following steps that will setup your machine. Im assuming you have a *Mac*.
+The following notes shows how to run .NET apps in Cloud Foundry. In order to test locally your .NET apps, use the following steps that will setup your machine. I'm assuming you have a *Mac*.
 
 
 == Install .NET Core
