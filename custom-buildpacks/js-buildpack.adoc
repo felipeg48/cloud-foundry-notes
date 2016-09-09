@@ -181,4 +181,4 @@ Now we have the *VCAP_SERVICES* environment variable set.
 
 === My Thoughts
 
-Probably this is a simple example and can be done in a different way, perhaps by overriding some variables that allows to create the *env.js*. 
+Probably this is a simple example and can be done in a different way, perhaps by overriding some variables that allows to create the *env.js*. The final *env.js* file only has the _VCAP_SERVICES_ variable but what happen if you need more info, like the _VCAP_APPLICATION_ or any other variable; well, that's up to you how you want to implemented.
