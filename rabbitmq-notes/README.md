@@ -33,3 +33,10 @@ The **polling-amqp** project will receive and process the votes and send a reply
 ```bash
 $ mvn clean package -DskipTests=true
 ```
+
+
+## TODO
+
+- [X] Simple RabbitMQ example deployable for Cloud Foundry
+- [ ] Add metrics with the Gauge and Counter services from Actuator
+- [ ] Add a Graph to represent the Metrics.
