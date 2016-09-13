@@ -105,6 +105,7 @@ $ mvn clean package -DskipTests=true
 
  }
  ```
+ and see how they changed!!
 
 ## TODO
 
