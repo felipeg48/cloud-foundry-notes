@@ -19,7 +19,7 @@ $ cf create-service p-rabbitmq standard rabbitmq
 
 #### Compile the two Projects:
 
-These projects are a Web projects, they depend only on:
+These projects are a Spring Boot Web projects and they depend only on:
 - spring-boot-starter-web
 - spring-boot-starter-amqp
 - spring-boot-starter-actuator
@@ -45,7 +45,6 @@ $ mvn clean package -DskipTests=true
 $ cd voters-amqp
 $ cf push voters-amqp -p target/voters-amqp-0.0.1-SNAPSHOT.war -b java_buildpack --no-start -m 512M
 ```
-
 2. Push the **pollings-amqp** app:
 ```bash
 $ cd pollingss-amqp
