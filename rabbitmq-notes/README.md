@@ -19,4 +19,17 @@ $ cf create-service p-rabbitmq standard rabbitmq
 
 #### Compile the two Projects:
 
-1.
+These projects are a Web projects, they depend only on:
+- spring-boot-starter-web
+- spring-boot-starter-amqp
+- spring-boot-starter-actuator
+
+The **voters-amqp** project will send 10 **_Candidate_** message every 1 second.
+```bash
+$ mvn clean package -DskipTests=true
+```
+
+The **polling-amqp** project will receive and process the votes and send a reply that everything went OK.
+```bash
+$ mvn clean package -DskipTests=true
+```
