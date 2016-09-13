@@ -52,7 +52,7 @@ $ mvn clean package -DskipTests=true
  $ cf push pollings-amqp -p target/pollings-amqp-0.0.1-SNAPSHOT.war -b java_buildpack --no-start -m 512M
  ```
  <aside class="notice">
- Remember to use the --random-route for not colide with another apps.
+ Remember to use the <b>--random-route</b> for not colide with another apps.
  </aside>
 3. Bind the apps to the _rabbitmq_ service
 
