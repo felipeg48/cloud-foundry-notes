@@ -12,7 +12,6 @@ The following apps are just a simple example to run RabbitMQ as basking services
 #### Prepare your Cloud Foundry Space
 1. Login into Cloud Foundry
 2. Create a RabbitMQ service instance:
-+
 ```bash
 $ cf create-service p-rabbitmq standard rabbitmq
 ```
