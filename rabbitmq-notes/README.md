@@ -24,7 +24,11 @@ These projects are a Web projects, they depend only on:
 - spring-boot-starter-amqp
 - spring-boot-starter-actuator
 
-The **voters-amqp** project will send 10 **_Candidate_** message every 1 second. This app will create a _polls_ exchange.
+A simple Topology, a Topic Exchange:
+![Topic Exchange](https://github.com/felipeg48/cloud-foundry-notes/blob/master/rabbitmq-notes/images/topology.png "Topic Exchange")
+
+
+The **voters-amqp** project will send 10 **_Candidate_** messages every 1 second. This app will create a _polls_ exchange.
 ```bash
 $ mvn clean package -DskipTests=true
 ```
