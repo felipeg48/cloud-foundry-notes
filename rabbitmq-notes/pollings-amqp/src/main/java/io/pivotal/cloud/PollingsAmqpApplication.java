@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.handler.annotation.SendTo;
 
 import io.pivotal.cloud.domain.Candidate;
+import io.pivotal.cloud.domain.Poll;
 
 @SpringBootApplication
 public class PollingsAmqpApplication {
@@ -25,10 +26,6 @@ public class PollingsAmqpApplication {
 	}
 	
 	private static final Logger log = LoggerFactory.getLogger(PollingsAmqpApplication.class);
-	private static final String EXCHANGE = "polls";
-	private static final String TQUEUE = "T";
-	private static final String HQUEUE = "H";
-	
 	private Candidate candidate = null;
 	
 	@Autowired
@@ -37,9 +34,10 @@ public class PollingsAmqpApplication {
 	private CounterService tCounterService; 
 	
 	
-	@RabbitListener(queues={TQUEUE})
+	@RabbitListener(queues={Poll.TQUEUE})
 	@SendTo
 	Candidate tProcess(Message message){
+		//Step. Getting the Message
 		candidate = (Candidate) SerializationUtils.deserialize(message.getBody());
 		log.info("Processing candidate: " + candidate);
 		
@@ -49,14 +47,15 @@ public class PollingsAmqpApplication {
 		//Step. Adding Metrics
 		int times = candidate.getVote();
 		for(int i = 1; i <= times; i++)
-		 tCounterService.increment("counter.polls.for.t");
+		 tCounterService.increment(Poll.TMETRIC);
 	
 		return candidate;
 	}
 	
-	@RabbitListener(queues={HQUEUE})
+	@RabbitListener(queues={Poll.HQUEUE})
 	@SendTo
 	Candidate hProcess(Message message){
+		//Step. Getting the Message
 		candidate = (Candidate) SerializationUtils.deserialize(message.getBody());
 		log.info("Processing candidate: " + candidate);
 		
@@ -66,28 +65,28 @@ public class PollingsAmqpApplication {
 		//Step. Adding Metrics
 		int times = candidate.getVote();
 		for(int i = 1; i <= times; i++)
-		 hCounterService.increment("counter.polls.for.h");
+		 hCounterService.increment(Poll.HMETRIC);
 		
 		return candidate;
 	}
 	
 	@Bean
 	Queue tQueue(){
-		return new Queue(TQUEUE, true);
+		return new Queue(Poll.TQUEUE, true);
 	}
 	
 	@Bean
 	Queue hQueue(){
-		return new Queue(HQUEUE, true);
+		return new Queue(Poll.HQUEUE, true);
 	}
 	
 	@Bean
 	Binding hBinding(){
-		return new Binding(HQUEUE, DestinationType.QUEUE, EXCHANGE, HQUEUE, null);
+		return new Binding(Poll.HQUEUE, DestinationType.QUEUE, Poll.EXCHANGE, Poll.HQUEUE, null);
 	}
 	
 	@Bean
 	Binding tBnding(){
-		return new Binding(TQUEUE, DestinationType.QUEUE, EXCHANGE, TQUEUE, null);
+		return new Binding(Poll.TQUEUE, DestinationType.QUEUE, Poll.EXCHANGE, Poll.TQUEUE, null);
 	}
 }

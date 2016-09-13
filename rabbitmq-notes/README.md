@@ -111,4 +111,4 @@ $ mvn clean package -DskipTests=true
 
 - [X] Simple RabbitMQ example deployable for Cloud Foundry
 - [X] Add metrics a Counter service from Actuator
-- [ ] Add a Graph to represent the Metrics.
+- [X] Add a Graph to represent the Metrics.
