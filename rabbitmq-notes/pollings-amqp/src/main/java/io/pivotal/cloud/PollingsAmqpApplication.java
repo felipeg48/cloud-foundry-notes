@@ -8,7 +8,9 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.utils.SerializationUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.metrics.CounterService;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -29,13 +31,26 @@ public class PollingsAmqpApplication {
 	
 	private Candidate candidate = null;
 	
+	@Autowired
+	private CounterService hCounterService; 
+	@Autowired
+	private CounterService tCounterService; 
+	
 	
 	@RabbitListener(queues={TQUEUE})
 	@SendTo
 	Candidate tProcess(Message message){
 		candidate = (Candidate) SerializationUtils.deserialize(message.getBody());
 		log.info("Processing candidate: " + candidate);
+		
+		//Step. Set Message OK
 		candidate.setCode("OK");
+		
+		//Step. Adding Metrics
+		int times = candidate.getVote();
+		for(int i = 1; i <= times; i++)
+		 tCounterService.increment("counter.polls.for.t");
+	
 		return candidate;
 	}
 	
@@ -44,7 +59,15 @@ public class PollingsAmqpApplication {
 	Candidate hProcess(Message message){
 		candidate = (Candidate) SerializationUtils.deserialize(message.getBody());
 		log.info("Processing candidate: " + candidate);
+		
+		//Step. Set Message OK
 		candidate.setCode("OK");
+		
+		//Step. Adding Metrics
+		int times = candidate.getVote();
+		for(int i = 1; i <= times; i++)
+		 hCounterService.increment("counter.polls.for.h");
+		
 		return candidate;
 	}
 	
