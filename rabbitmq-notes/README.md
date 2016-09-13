@@ -45,6 +45,7 @@ $ mvn clean package -DskipTests=true
 $ cd voters-amqp
 $ cf push voters-amqp -p target/voters-amqp-0.0.1-SNAPSHOT.war -b java_buildpack --no-start -m 512M
 ```
++
 2. Push the **pollings-amqp** app:
 ```bash
 $ cd pollingss-amqp
