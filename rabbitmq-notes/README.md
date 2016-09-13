@@ -24,12 +24,12 @@ These projects are a Web projects, they depend only on:
 - spring-boot-starter-amqp
 - spring-boot-starter-actuator
 
-The **voters-amqp** project will send 10 **_Candidate_** message every 1 second.
+The **voters-amqp** project will send 10 **_Candidate_** message every 1 second. This app will create a _polls_ exchange.
 ```bash
 $ mvn clean package -DskipTests=true
 ```
 
-The **polling-amqp** project will receive and process the votes and send a reply that everything went OK.
+The **polling-amqp** project will receive and process the votes and send a reply that everything went OK. This app will create the _queues_ and necessary bindings.
 ```bash
 $ mvn clean package -DskipTests=true
 ```
