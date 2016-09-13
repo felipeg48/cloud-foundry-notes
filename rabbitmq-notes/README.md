@@ -40,32 +40,28 @@ $ mvn clean package -DskipTests=true
 #### Deploy to Cloud Foundry
 
 1. Push the **voters-amqp** app:
-```bash
-$ cd voters-amqp
-$ cf push voters-amqp -p target/voters-amqp-0.0.1-SNAPSHOT.war -b java_buildpack --no-start -m 512M
-```
-
+ ```bash
+ $ cd voters-amqp
+ $ cf push voters-amqp -p target/voters-amqp-0.0.1-SNAPSHOT.war -b java_buildpack --no-start -m 512M
+ ```
 2. Push the **pollings-amqp** app:
-```bash
-$ cd pollingss-amqp
-$ cf push pollings-amqp -p target/pollings-amqp-0.0.1-SNAPSHOT.war -b java_buildpack --no-start -m 512M
-```
-<aside class="notice">
-Remember to use the --random-route for not colide with another apps.
-</aside>
-
+ ```bash
+ $ cd pollingss-amqp
+ $ cf push pollings-amqp -p target/pollings-amqp-0.0.1-SNAPSHOT.war -b java_buildpack --no-start -m 512M
+ ```
+ <aside class="notice">
+ Remember to use the --random-route for not colide with another apps.
+ </aside>
 3. Bind the apps to the _rabbitmq_ service
-```bash
-$ cf bind-service voters-aqmp rabbitmq
-$ cf bind-service pollings-amqp rabbitm
-```
-
+ ```bash
+ $ cf bind-service voters-aqmp rabbitmq
+ $ cf bind-service pollings-amqp rabbitm
+ ```
 4. Starts the apps
-```bash
-$ cf start voters-aqmp
-$ cf start pollings-amqp
-```
-
+ ```bash
+ $ cf start voters-aqmp
+ $ cf start pollings-amqp
+ ```
 5. Watch the Logs fgor each app.
 
 ## TODO
