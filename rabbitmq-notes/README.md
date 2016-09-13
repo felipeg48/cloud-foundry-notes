@@ -105,7 +105,8 @@ $ mvn clean package -DskipTests=true
 
  }
  ```
- and see how they changed!!
+ and see how they changed!! Also you can see a Graph that represents the totals, you can open a browser and point to: **_pollings-amqp.cfapps.io_** (or whatever URL is for the pollings app).
+ ![RabbitMQ Polls](https://github.com/felipeg48/cloud-foundry-notes/blob/master/rabbitmq-notes/images/polls.png "RabbitMQ Polls")
 
 ## TODO
 
