@@ -67,9 +67,47 @@ $ mvn clean package -DskipTests=true
  $ cf start pollings-amqp
  ```
 5. Watch the Logs fgor each app.
+6. You can take a look the pollings-amqp.cfapps.io/metrics  and take a look at the:
+ - **counter.polls.for.h**
+ - **counter.polls.for.t**
+ ```json
+ {
+
+    "mem": 379870,
+    "mem.free": 299583,
+    "processors": 8,
+    "instance.uptime": 14258,
+    "uptime": 17797,
+    "systemload.average": 2.8251953125,
+    "heap.committed": 324608,
+    "heap.init": 262144,
+    "heap.used": 25024,
+    "heap": 3728384,
+    "nonheap.committed": 56336,
+    "nonheap.init": 2496,
+    "nonheap.used": 55264,
+    "nonheap": 0,
+    "threads.peak": 47,
+    "threads.daemon": 23,
+    "threads.totalStarted": 53,
+    "threads": 45,
+    "classes": 6731,
+    "classes.loaded": 6731,
+    "classes.unloaded": 0,
+    "gc.ps_scavenge.count": 7,
+    "gc.ps_scavenge.time": 68,
+    "gc.ps_marksweep.count": 2,
+    "gc.ps_marksweep.time": 115,
+    "httpsessions.max": -1,
+    "httpsessions.active": 0,
+    "counter.polls.for.h": 355,
+    "counter.polls.for.t": 395
+
+ }
+ ```
 
 ## TODO
 
 - [X] Simple RabbitMQ example deployable for Cloud Foundry
-- [ ] Add metrics with the Gauge and Counter services from Actuator
+- [X] Add metrics a Counter service from Actuator
 - [ ] Add a Graph to represent the Metrics.
