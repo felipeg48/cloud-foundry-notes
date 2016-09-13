@@ -67,7 +67,7 @@ $ mvn clean package -DskipTests=true
  $ cf start pollings-amqp
  ```
 5. Watch the Logs fgor each app.
-6. You can take a look the pollings-amqp.cfapps.io/metrics  and take a look at the:
+6. You can take a look the **_pollings-amqp.cfapps.io/metrics_** (or whatever URL is for the pollings app)  and take a look at the:
  - **counter.polls.for.h**
  - **counter.polls.for.t**
  ```json
