@@ -40,6 +40,7 @@ $ mvn clean package -DskipTests=true
 #### Deploy to Cloud Foundry
 
 1. Push the **voters-amqp** app:
+
  ```bash
  $ cd voters-amqp
  $ cf push voters-amqp -p target/voters-amqp-0.0.1-SNAPSHOT.war -b java_buildpack --no-start -m 512M
