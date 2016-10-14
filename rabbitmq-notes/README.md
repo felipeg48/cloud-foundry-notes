@@ -58,7 +58,7 @@ $ mvn clean package -DskipTests=true
 
  ```bash
  $ cf bind-service voters-aqmp rabbitmq
- $ cf bind-service pollings-amqp rabbitm
+ $ cf bind-service pollings-amqp rabbitmq
  ```
 4. Starts the apps
 
